@@ -17,10 +17,8 @@ export function ContactsProvider({ children }) {
   }
 
   return (
-    <div>
-      <ContactsContext.Provider value={{ contacts, createContact }}>
-        {children}
-      </ContactsContext.Provider>
-    </div>
+    <ContactsContext.Provider value={{ contacts, createContact }}>
+      {children}
+    </ContactsContext.Provider>
   );
 }
