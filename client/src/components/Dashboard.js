@@ -1,4 +1,3 @@
-import React from "react";
 import { useConversations } from "../contexts/ConversationsProvider";
 import OpenConversation from "./OpenConversation";
 import Sidebar from "./Sidebar";
