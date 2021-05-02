@@ -1,0 +1,12 @@
+https://sites.tufts.edu/olukunleowolabi/2020/02/13/sentiment-analysis-using-bag-of-words-model/
+https://stackabuse.com/python-for-nlp-creating-bag-of-words-model-from-scratch/
+https://towardsdatascience.com/build-and-compare-3-models-nlp-sentiment-prediction-67320979de61
+https://arxiv.org/pdf/1301.6685.pdf
+https://machinelearningmastery.com/sparse-matrices-for-machine-learning/
+https://dziganto.github.io/Sparse-Matrices-For-Efficient-Machine-Learning/
+https://www.youtube.com/watch?v=KE53PAfVJ5c
+https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html
+https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
+https://medium.com/swlh/run-python-script-from-node-js-and-send-data-to-browser-15677fcf199f
+https://www.kdnuggets.com/2020/02/deploy-machine-learning-model.html
+https://medium.com/bolt-labs/deploying-machine-learning-models-on-node-js-ff25c540cb13
