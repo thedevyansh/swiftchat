@@ -1,0 +1,23 @@
+message,agent,sentiment,knowledge_source/0,turn_rating
+Are you a fan of Google or Microsoft?,agent_1,Curious to dive deeper,FS1,Good
+Both are excellent technology they are helpful in many ways. For the security purpose both are super.,agent_2,Curious to dive deeper,FS1,Excellent
+"I'm not  a huge fan of Google, but I use it a lot because I have to. I think they are a monopoly in some sense. ",agent_1,Curious to dive deeper,FS1,Good
+"Google provides online related services and products, which includes online ads, search engine and cloud computing.",agent_2,Curious to dive deeper,FS1,Excellent
+"Yeah, their services are good. I'm just not a fan of intrusive they can be on our personal lives. ",agent_1,Curious to dive deeper,FS1,Good
+Google is leading the alphabet subsidiary and will continue to be the Umbrella company for Alphabet internet interest.,agent_2,Curious to dive deeper,FS1,Excellent
+"Did you know Google had hundreds of live goats to cut the grass in the past? 
+",agent_1,Curious to dive deeper,FS1,Good
+"It is very interesting. Google provide ""Chrome OS"" which is a light weight OS. Google provided a lot of hardware mainly in 2010 to 2015. ",agent_2,Curious to dive deeper,FS1,Excellent
+I like Google Chrome. Do you use it as well for your browser? ,agent_1,Curious to dive deeper,FS1,Good
+"Yes.Google is the biggest search engine and Google service figure out top 100 website, including Youtube and Blogger.",agent_2,Curious to dive deeper,FS1,Excellent
+"By the way, do you like Fish? ",agent_1,Curious to dive deeper,FS2,Good
+Yes. They form a sister group of tourniquets- they make the sea water clean and remove the dust from it. Fish is the biggest part in the eco-system.,agent_2,Curious to dive deeper,FS2,Excellent
+Did you know that a seahorse is the only fish to have a neck? ,agent_1,Curious to dive deeper,FS2,Good
+"Freshwater fish only drink water through the skin via Osmosis, Saltwater fish drink water through the mouth. Dolphins are friendly to human beings.",agent_2,Happy,FS2,Excellent
+"Interesting, they also have gills. Did you know that jellyfish are immortal? ",agent_1,Curious to dive deeper,FS2,Good
+Yes. Fish is the important resources of human world wide for the commercial and subsistence fish hunts the fish in the wild fisheries.,agent_2,Curious to dive deeper,FS2,Excellent
+"What about cats, do you like cats? I'm a dog fan myself. ",agent_1,Curious to dive deeper,FS3,Good
+The cat is referred as domestic cat and wild cat. They make our world very clean from rats! ,agent_2,Curious to dive deeper,FS3,Excellent
+"Yeah, cats can be cool, but they sure do spend a lot of their time sleeping. ",agent_1,Curious to dive deeper,FS3,Good
+Cats hear the sounds too faint or too high frequency human ears can hear. ,agent_2,Curious to dive deeper,FS3,Excellent
+"I heard that too. Well, it was nice chatting with you. Have a good day. ",agent_1,Curious to dive deeper,FS3,Excellent
