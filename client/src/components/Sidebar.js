@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Tab, Nav, Button, Modal } from "react-bootstrap";
+import { Tab, Nav } from "react-bootstrap";
 import Contacts from "./Contacts";
 import Conversations from "./Conversations";
 import NewConversationModal from "./NewConversationModal";
 import NewContactModal from "./NewContactModal";
+import { Button, Dialog, Typography } from "@material-ui/core";
 
 const CONVERSATIONS_KEY = "conversations";
 const CONTACTS_KEY = "contacts";
@@ -36,21 +37,31 @@ export default function Sidebar({ id }) {
             <Contacts />
           </Tab.Pane>
         </Tab.Content>
-        <div className="p-2 border-top border-right small">
+        <Typography style={{fontSize: "13px"}} className="p-2 border-top border-right">
           Your ID: <span className="text-muted">{id}</span>
-        </div>
-        <Button onClick={() => setModalOpen(true)} className="rounded-0">
+        </Typography>
+        <Button
+          onClick={() => setModalOpen(true)}
+          className="rounded-0"
+          variant="contained"
+          color="primary"
+          disableElevation
+        >
           New {conversationsOpen ? "Conversations" : "Contacts"}
         </Button>
       </Tab.Container>
 
-      <Modal show={modalOpen} onHide={closeModal}>
+      <Dialog
+        open={modalOpen}
+        onClose={closeModal}
+        aria-labelledby="form-dialog-title"
+      >
         {conversationsOpen ? (
           <NewConversationModal closeModal={closeModal} />
         ) : (
           <NewContactModal closeModal={closeModal} />
         )}
-      </Modal>
+      </Dialog>
     </div>
   );
 }
