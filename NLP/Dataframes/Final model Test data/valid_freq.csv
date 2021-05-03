@@ -1,0 +1,23 @@
+message,agent,sentiment,knowledge_source/0,knowledge_source/1,knowledge_source/2,knowledge_source/3,turn_rating
+Are you a football fan?,agent_1,Curious to dive deeper,AS1,FS1,FS3,Personal Knowledge,Passable
+"yes, I'm. a football fan.",agent_2,Curious to dive deeper,FS3,,,,Excellent
+Did you now that the university of Iowa's visiting football teams locker room is painted pink?,agent_1,Curious to dive deeper,FS3,Personal Knowledge,,,Good
+"Yes, I do.  I think they want to intimidate the visiting teams. ",agent_2,Neutral,FS3,Personal Knowledge,,,Excellent
+Something like that would just make me mad and geek my team up! You?,agent_1,Curious to dive deeper,FS3,Personal Knowledge,,,Good
+"Yes, LOL. Do you know about ESPN winning an emmy?",agent_2,Happy,FS3,,,,Excellent
+"Yes and that superimposed line made life a little easier, lol! Hard to believe that there are only 11 minutes of live game play.",agent_1,Curious to dive deeper,FS2,Personal Knowledge,,,Good
+"Yes, what did they do the rest of the time?",agent_2,Curious to dive deeper,FS3,,,,Excellent
+I know right! Did you know that in the 60's top bowler made more than top nfl players?,agent_1,Curious to dive deeper,FS2,Personal Knowledge,,,Good
+I do.  They now make pennies compared to professional football players.,agent_2,Neutral,FS3,Personal Knowledge,,,Excellent
+"I would hope so, just goes to show how little the nfl paid back then. Do you know what the highest scoring football game was?",agent_1,Curious to dive deeper,FS3,Personal Knowledge,,,Good
+NFL or college football?,agent_2,Curious to dive deeper,FS3,,,,Excellent
+Think college back in the day when they wore those ridiculous helmets. ,agent_1,Curious to dive deeper,FS3,Personal Knowledge,,,Good
+Cumberland was defeated by Georgia Tech. The scores were 222-0.  It was in 1916.,agent_2,Neutral,FS3,,,,Excellent
+"Yup and i know my hint helped, lol. Did you know in Austria they call football rugby?",agent_1,Curious to dive deeper,FS3,Personal Knowledge,,,Good
+Yes.  I wonder why though.  Do you know why?,agent_2,Curious to dive deeper,FS3,,,,Excellent
+Apparently the different variations are called football codes. It's called other things in other countries.,agent_1,Curious to dive deeper,FS3,Personal Knowledge,,,Good
+"Green-Ellis, an RB, has never fumbled the ball in his NFL career.",agent_2,Neutral,FS3,,,,Excellent
+Now that's an achievement. Do you know if he's in the hall of fame?  ,agent_1,Surprised,FS3,Personal Knowledge,,,Good
+"No, I do not think so other wise I would have heard.",agent_2,Neutral,FS3,Personal Knowledge,,,Excellent
+"Do you watch tv at all? It's just a mass medium for advertising, entertainment and news.",agent_1,Curious to dive deeper,FS2,Personal Knowledge,,,Good
+"Yes, I do watch television once a day.  I like to watch national news.  I've got to run now.  Great chats!",agent_2,Happy,FS2,,,,Excellent

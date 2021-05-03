@@ -1,7 +1,16 @@
 import { useState } from "react";
-import { Modal, Form, Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { useContacts } from "../contexts/ContactsProvider";
 import { useConversations } from "../contexts/ConversationsProvider";
+import {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Button,
+  FormControlLabel,
+  Checkbox,
+} from "@material-ui/core";
 
 export default function NewConversationModal({ closeModal }) {
   const [selectedContactIds, setSelectedContactIds] = useState([]);
@@ -10,7 +19,7 @@ export default function NewConversationModal({ closeModal }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    createConversation(selectedContactIds);
+    if (selectedContactIds.length !== 0) createConversation(selectedContactIds);
     closeModal();
   }
 
@@ -28,23 +37,43 @@ export default function NewConversationModal({ closeModal }) {
 
   return (
     <>
-      <Modal.Header closeButton>Create Conversation</Modal.Header>
-      <Modal.Body>
-        <Form onSubmit={handleSubmit}>
-          {contacts.map((contact) => (
-            <Form.Group controlId={contact.id} key={contact.id}>
-              <Form.Check
-                type="checkbox"
-                value={selectedContactIds.includes(contact.id)}
-                label={contact.name}
-                onChange={() => handleCheckboxChange(contact.id)}
-              />
-            </Form.Group>
-          ))}
+      <DialogTitle id="form-dialog-title">Create a new conversation</DialogTitle>
 
-          <Button type="submit">Create</Button>
-        </Form>
-      </Modal.Body>
+      <DialogContent>
+        {contacts.length === 0 ? (
+          <DialogContentText>
+            No contacts found. Create a new contact first to start messaging.
+          </DialogContentText>
+        ) : (
+          <div>
+            <DialogContentText>
+              Start a new conversation with one or more contacts by selecting
+              the checkboxes.
+            </DialogContentText>
+            <Form onSubmit={handleSubmit}>
+              {contacts.map((contact) => (
+                <div key={contact.id}>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        color="primary"
+                        onChange={() => handleCheckboxChange(contact.id)}
+                      />
+                    }
+                    label={contact.name}
+                  />
+                </div>
+              ))}
+
+              <DialogActions>
+                <Button color="primary" type="submit">
+                  Create new conversation
+                </Button>
+              </DialogActions>
+            </Form>
+          </div>
+        )}
+      </DialogContent>
     </>
   );
 }

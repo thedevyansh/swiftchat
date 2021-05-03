@@ -1,35 +1,62 @@
-import { useRef } from "react";
-import { Modal, Form, Button } from "react-bootstrap";
+import { useState } from "react";
+import { Form } from "react-bootstrap";
 import { useContacts } from "../contexts/ContactsProvider";
+import {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Button,
+  TextField,
+} from "@material-ui/core";
 
 export default function NewContactModal({ closeModal }) {
-  const idRef = useRef();
-  const nameRef = useRef();
   const { createContact } = useContacts();
+  const [idValue, setIdValue] = useState("");
+  const [nameValue, setNameValue] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
-    createContact(idRef.current.value, nameRef.current.value);
+    createContact(idValue, nameValue);
     closeModal();
   }
-  
+
   return (
     <>
-      <Modal.Header closeButton>Create Contact</Modal.Header>
-      <Modal.Body>
-        <Form onSubmit={handleSubmit}>
-          <Form.Group>
-            <Form.Label>ID</Form.Label>
-            <Form.Control type="text" ref={idRef} required />
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>Name</Form.Label>
-            <Form.Control type="text" ref={nameRef} required />
-          </Form.Group>
+      <DialogTitle id="form-dialog-title">Create a new contact</DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          Add new contacts to start messaging them. You can send them message
+          personally or in groups.
+        </DialogContentText>
 
-          <Button type="submit">Create</Button>
+        <Form onSubmit={handleSubmit}>
+          <TextField
+            autoFocus
+            margin="dense"
+            label="ID"
+            type="text"
+            fullWidth
+            onChange={(e) => setIdValue(e.target.value)}
+            required
+          />
+
+          <TextField
+            margin="dense"
+            label="Name"
+            type="text"
+            fullWidth
+            onChange={(e) => setNameValue(e.target.value)}
+            required
+          />
+
+          <DialogActions>
+            <Button color="primary" type="submit">
+              Create contact
+            </Button>
+          </DialogActions>
         </Form>
-      </Modal.Body>
+      </DialogContent>
     </>
   );
 }
