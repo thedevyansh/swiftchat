@@ -78,6 +78,7 @@ export default function OpenConversation({ showMemberList }) {
 
       <Form onSubmit={handleSubmit} className="d-flex m-2">
         <TextField
+        style={{backgroundColor: "#F8F8F8"}}
           className="flex-grow-1"
           id="outlined-basic"
           label="Enter your message"
