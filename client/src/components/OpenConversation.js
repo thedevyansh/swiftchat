@@ -2,24 +2,10 @@ import { useState, useCallback } from "react";
 import { Form } from "react-bootstrap";
 import { useConversations } from "../contexts/ConversationsProvider";
 import { Button, TextField } from "@material-ui/core";
+import Header from "./Header";
+import SendIcon from "@material-ui/icons/Send";
 
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import StarIcon from "@material-ui/icons/Star";
-import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
-
-const useStyles = makeStyles((theme) => ({
-  title: {
-    flexGrow: 1,
-  },
-}));
-
-export default function OpenConversation() {
-  const classes = useStyles();
-
+export default function OpenConversation({ showMemberList }) {
   const [text, setText] = useState("");
   const { selectedConversation, sendMessage } = useConversations();
   const setRef = useCallback((node) => {
@@ -40,27 +26,25 @@ export default function OpenConversation() {
 
   return (
     <div className="d-flex flex-column flex-grow-1">
-      <div>
-        <AppBar position="static" elevation={0}>
-          <Toolbar variant="dense">
-            <Typography variant="h6" className={classes.title}>
-              Conversation
-            </Typography>
-            <IconButton color="inherit">
-              <StarIcon />
-            </IconButton>
-            <IconButton color="inherit">
-              <PeopleAltIcon />
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-      </div>
+      <Header showMembers={showMemberList} />
 
       <div className="flex-grow-1 overflow-auto mt-3 mb-3">
         <div className="d-flex flex-column align-items-start justify-content-end px-3">
           {selectedConversation.messages.map((message, index) => {
             const lastMessage =
               selectedConversation.messages.length - 1 === index;
+
+            const styleMessage = {
+              borderRadius: "20px",
+              padding: "5px 14px",
+              fontSize: "15px",
+              maxWidth: "400px",
+              backgroundImage: `${
+                message.fromMe
+                  ? "linear-gradient(to right, #9733ee, #da22ff)"
+                  : "linear-gradient(to right, #b3cdd1, #9fa4c4)"
+              }`,
+            };
 
             return (
               <div
@@ -73,14 +57,14 @@ export default function OpenConversation() {
                 }`}
               >
                 <div
-                  className={`rounded px-2 py-1 ${
-                    message.fromMe ? "bg-primary text-white" : "border"
-                  }`}
+                  style={styleMessage}
+                  className={`${message.fromMe ? "text-white" : ""}`}
                 >
                   {message.text}
                 </div>
                 <div
-                  className={`text-muted small ${
+                  style={{ fontSize: "11px" }}
+                  className={`mt-1 mr-1 text-muted ${
                     message.fromMe ? "text-right" : ""
                   }`}
                 >
@@ -94,6 +78,7 @@ export default function OpenConversation() {
 
       <Form onSubmit={handleSubmit} className="d-flex m-2">
         <TextField
+        style={{backgroundColor: "#F8F8F8"}}
           className="flex-grow-1"
           id="outlined-basic"
           label="Enter your message"
@@ -104,13 +89,13 @@ export default function OpenConversation() {
         />
 
         <Button
-          className="ml-1"
-          variant="contained"
+          className="ml-2"
           color="primary"
+          variant="contained"
           disableElevation
           type="submit"
         >
-          Submit
+          <SendIcon />
         </Button>
       </Form>
     </div>

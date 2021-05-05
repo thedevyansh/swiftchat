@@ -4,6 +4,7 @@ import Dashboard from "./Dashboard";
 import { ContactsProvider } from "../contexts/ContactsProvider";
 import { ConversationsProvider } from "../contexts/ConversationsProvider";
 import { SocketProvider } from "../contexts/SocketProvider";
+import "./style.css"
 
 function App() {
   const [id, setId] = useLocalStorage("id", "");
