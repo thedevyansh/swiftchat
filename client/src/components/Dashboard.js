@@ -9,14 +9,18 @@ export default function Dashboard({ id }) {
   const [showListOfMembers, setShowListOfMembers] = useState(false);
 
   function showMembers() {
-    setShowListOfMembers(showList => !showList)
+    setShowListOfMembers((showList) => !showList);
   }
 
   return (
     <div className="d-flex" style={{ height: "100vh" }}>
       <Sidebar id={id} />
-      {selectedConversation && <OpenConversation showMemberList={showMembers} />}
-      {showListOfMembers && <ShowGroupMembers />}
+      {selectedConversation && (
+        <OpenConversation showMemberList={showMembers} />
+      )}
+      {selectedConversation && selectedConversation.recipients.length !== 1 && showListOfMembers && (
+        <ShowGroupMembers />
+      )}
     </div>
   );
 }

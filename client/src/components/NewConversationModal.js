@@ -45,7 +45,7 @@ export default function NewConversationModal({ closeModal }) {
             No contacts found. Create a new contact first to start messaging.
           </DialogContentText>
         ) : (
-          <div>
+          <>
             <DialogContentText>
               Start a new conversation with one or more contacts by selecting
               the checkboxes.
@@ -53,7 +53,7 @@ export default function NewConversationModal({ closeModal }) {
             <Form onSubmit={handleSubmit}>
               {contacts.map((contact) => (
                 <div key={contact.id}>
-                  <FormControlLabel
+                  <FormControlLabel style={{margin: 0}}
                     control={
                       <Checkbox
                         color="primary"
@@ -71,7 +71,7 @@ export default function NewConversationModal({ closeModal }) {
                 </Button>
               </DialogActions>
             </Form>
-          </div>
+          </>
         )}
       </DialogContent>
     </>
