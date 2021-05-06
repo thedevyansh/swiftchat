@@ -60,26 +60,29 @@ export default function FullScreenDialog({ id, open, handleClose }) {
         </AppBar>
         <List>
           {selectedConversation.messages.map((message, index) => {
-            let sender;
-            if (message.sender === id) sender = "You";
-            else {
-              let recipients = selectedConversation.recipients;
-              let len = recipients.length;
-              for (let k = 0; k < len; k++) {
-                if (recipients[k].id === message.sender) {
-                  sender = recipients[k].name;
-                  break;
+            if (message.isImportant === 1) {
+              let sender;
+              if (message.sender === id) sender = "You";
+              else {
+                let recipients = selectedConversation.recipients;
+                let len = recipients.length;
+                for (let k = 0; k < len; k++) {
+                  if (recipients[k].id === message.sender) {
+                    sender = recipients[k].name;
+                    break;
+                  }
                 }
               }
+              return (
+                <div key={index}>
+                  <ListItem button>
+                    <ListItemText primary={message.text} secondary={sender} />
+                  </ListItem>
+                  <Divider />
+                </div>
+              );
             }
-            return (
-              <div key={index}>
-                <ListItem button>
-                  <ListItemText primary={message.text} secondary={sender} />
-                </ListItem>
-                <Divider />
-              </div>
-            );
+            else return null
           })}
         </List>
       </Dialog>

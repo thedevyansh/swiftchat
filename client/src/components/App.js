@@ -6,6 +6,7 @@ import { ContactsProvider } from "../contexts/ContactsProvider";
 import { ConversationsProvider } from "../contexts/ConversationsProvider";
 import { SocketProvider } from "../contexts/SocketProvider";
 import "./App.css";
+import { loadModels } from "../sentimentAnalysis/loadmodels";
 
 function App() {
   const [id, setId] = useLocalStorage("id", "");
@@ -29,6 +30,7 @@ function App() {
           });
       }
     }
+    loadModels();
   }, []);
 
   const dashboard = (

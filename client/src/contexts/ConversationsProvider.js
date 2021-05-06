@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect, useCallback } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { useContacts } from "./ContactsProvider";
 import { useSocket } from "./SocketProvider";
+import * as tf from "@tensorflow/tfjs";
 
 const ConversationsContext = React.createContext();
 
@@ -25,12 +26,11 @@ export function ConversationsProvider({ id, children }) {
   }
 
   const addMessageToConversation = useCallback(
-    ({ recipients, text, sender }) => {
-      // let isImportant = predictType(text)
+    ({ recipients, text, sender, isImportant }) => {
       setConversations((prevConversations) => {
         let madeChange = false;
-        const newMessage = { sender, text };
-        // const newMessage = {sender, text, isImportant}
+        //const newMessage = { sender, text };
+        const newMessage = { sender, text, isImportant };
         const newConversations = prevConversations.map((conversation) => {
           if (arrayEquality(conversation.recipients, recipients)) {
             madeChange = true;
@@ -61,8 +61,13 @@ export function ConversationsProvider({ id, children }) {
   }, [socket, addMessageToConversation]);
 
   function sendMessage(recipients, text) {
-    socket.emit("send-message", { recipients, text });
-    addMessageToConversation({ recipients, text, sender: id });
+    chatResult(text, recipients);
+    socket.emit("send-message", {
+      recipients,
+      text,
+      isImportant: window.isImportant,
+    });
+    //addMessageToConversation({ recipients, text, sender: id });
   }
 
   const formattedConversations = conversations.map((conversation, index) => {
@@ -97,6 +102,81 @@ export function ConversationsProvider({ id, children }) {
     selectConversationIndex: setSelectedConversationIndex,
     selectedConversation: formattedConversations[selectedConversationIndex],
     sendMessage,
+  };
+
+  const chatResult = (chatString, recipients) => {
+    let chatInterFlags = { job: 2, business: 2, tech: 2, medical: 2, work: 2 };
+
+    function refineInputMessage(chatString) {
+      chatString = chatString.toLowerCase();
+      chatString = chatString.replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ");
+      chatString = chatString.trim();
+      let finalString = " " + chatString + " ";
+
+      return finalString;
+    }
+
+    function convertToTensor(finalString, features) {
+      let temp = [];
+      for (let i = 0; i < features.length; i++) {
+        var searchString = new RegExp(features[i], "g");
+        var x = finalString.match(searchString);
+        var count = x ? x.length : 0;
+        if (count > 0) temp.push(count);
+        else temp.push(0);
+      }
+      return temp;
+    }
+
+    function predict(featureName, inputTensor, chatString, recipients) {
+      if (window.INTERMODEL[featureName]) {
+        let finalInput = [inputTensor];
+        let result = window.INTERMODEL[featureName].predict(
+          tf.tensor(finalInput)
+        );
+        const answer = result.dataSync()[0] >= 0.5 ? 0 : 1; //final predicted value from that model(0 or 1)
+
+        if (featureName !== "final") {
+          chatInterFlags[featureName] = answer;
+
+          let x = Object.values(chatInterFlags);
+          var changeFlag = x.indexOf(2);
+
+          if (changeFlag === -1) {
+            predict("final", x, chatString, recipients); //function for final prediction
+          }
+        } else {
+          // let genAns = answer ^ 1;
+          window.isImportant = answer ^ 1;
+          addMessageToConversation({
+            recipients,
+            text: chatString,
+            sender: id,
+            isImportant: window.isImportant,
+          });
+        }
+      } else {
+        setTimeout(function () {
+          predict(featureName, inputTensor, chatString, recipients);
+        }, 50);
+      }
+    }
+
+    function sendTensorToModel(chatString, featureName, receiver) {
+      let feature1 = JSON.parse(localStorage.getItem(featureName));
+
+      let inputTensor = convertToTensor(
+        refineInputMessage(chatString),
+        feature1
+      );
+      predict(featureName, inputTensor, chatString, receiver);
+    }
+
+    sendTensorToModel(chatString, "job", recipients);
+    sendTensorToModel(chatString, "business", recipients);
+    sendTensorToModel(chatString, "tech", recipients);
+    sendTensorToModel(chatString, "medical", recipients);
+    sendTensorToModel(chatString, "work", recipients);
   };
 
   return (

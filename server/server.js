@@ -8,7 +8,7 @@ io.on("connection", (socket) => {
   const id = socket.handshake.query.id;
   socket.join(id);
 
-  socket.on("send-message", ({ recipients, text }) => {
+  socket.on("send-message", ({ recipients, text, isImportant }) => {
     recipients.forEach((recipient) => {
       const newRecipients = recipients.filter((r) => r !== recipient);
       newRecipients.push(id);
@@ -16,6 +16,7 @@ io.on("connection", (socket) => {
         recipients: newRecipients,
         sender: id,
         text,
+        isImportant
       });
     });
   });
