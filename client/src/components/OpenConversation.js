@@ -5,7 +5,7 @@ import { Button, TextField } from "@material-ui/core";
 import Header from "./Header";
 import SendIcon from "@material-ui/icons/Send";
 
-export default function OpenConversation({ showMemberList }) {
+export default function OpenConversation({ id, showMemberList }) {
   const [text, setText] = useState("");
   const { selectedConversation, sendMessage } = useConversations();
   const setRef = useCallback((node) => {
@@ -26,7 +26,7 @@ export default function OpenConversation({ showMemberList }) {
 
   return (
     <div className="d-flex flex-column flex-grow-1">
-      <Header showMembers={showMemberList} />
+      <Header showMembers={showMemberList} id={id} />
 
       <div className="flex-grow-1 overflow-auto mt-3 mb-3">
         <div className="d-flex flex-column align-items-start justify-content-end px-3">
@@ -78,7 +78,7 @@ export default function OpenConversation({ showMemberList }) {
 
       <Form onSubmit={handleSubmit} className="d-flex m-2">
         <TextField
-        style={{backgroundColor: "#F8F8F8"}}
+          style={{ backgroundColor: "#F8F8F8" }}
           className="flex-grow-1"
           id="outlined-basic"
           label="Enter your message"

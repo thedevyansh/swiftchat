@@ -26,9 +26,11 @@ export function ConversationsProvider({ id, children }) {
 
   const addMessageToConversation = useCallback(
     ({ recipients, text, sender }) => {
+      // let isImportant = predictType(text)
       setConversations((prevConversations) => {
         let madeChange = false;
         const newMessage = { sender, text };
+        // const newMessage = {sender, text, isImportant}
         const newConversations = prevConversations.map((conversation) => {
           if (arrayEquality(conversation.recipients, recipients)) {
             madeChange = true;

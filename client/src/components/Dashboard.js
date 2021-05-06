@@ -16,7 +16,7 @@ export default function Dashboard({ id }) {
     <div className="d-flex" style={{ height: "100vh" }}>
       <Sidebar id={id} />
       {selectedConversation && (
-        <OpenConversation showMemberList={showMembers} />
+        <OpenConversation showMemberList={showMembers} id={id} />
       )}
       {selectedConversation && selectedConversation.recipients.length !== 1 && showListOfMembers && (
         <ShowGroupMembers />
