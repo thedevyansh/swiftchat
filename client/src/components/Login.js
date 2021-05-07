@@ -21,7 +21,18 @@ export default function Login({ onIdSubmit }) {
       className=" myForm d-flex flex-column justify-content-center"
       style={{ height: "100vh" }}
     >
-      <Typography variant="h3" className="mb-4">SwiftChat</Typography>
+      <div className="d-flex">
+        <img
+          src="../../swiftchatlogo.jpg"
+          alt="SwiftChat Logo"
+          width="80"
+          height="80"
+          className="mb-4"
+        />
+        <Typography variant="h3" className="mb-4">
+          SwiftChat
+        </Typography>
+      </div>
 
       <Form onSubmit={handleSubmit} className="w-100">
         <TextField

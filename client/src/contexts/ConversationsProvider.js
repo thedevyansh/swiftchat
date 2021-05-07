@@ -147,7 +147,7 @@ export function ConversationsProvider({ id, children }) {
           }
         } else {
           // let genAns = answer ^ 1;
-          window.isImportant = answer ^ 1;
+          window.isImportant = answer;
           addMessageToConversation({
             recipients,
             text: chatString,
