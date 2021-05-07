@@ -3,10 +3,11 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
-import StarIcon from "@material-ui/icons/Star";
+import LabelImportantIcon from "@material-ui/icons/LabelImportant";
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import { useConversations } from "../contexts/ConversationsProvider";
 import ShowImportantMessages from "./ShowImportantMessages";
+import Tooltip from "@material-ui/core/Tooltip";
 
 export default function Header({ id, showMembers }) {
   const [open, setOpen] = useState(false);
@@ -35,13 +36,17 @@ export default function Header({ id, showMembers }) {
           <Typography variant="h6" style={{ flexGrow: 1, fontSize: "18px" }}>
             {members.join(", ")}
           </Typography>
-          <IconButton color="inherit"  onClick={handleClickOpen}>
-            <StarIcon />
-          </IconButton>
-          {selectedConversation.recipients.length !== 1 && (
-            <IconButton color="inherit" onClick={showMembers}>
-              <PeopleAltIcon />
+          <Tooltip title="Important" arrow>
+            <IconButton color="inherit" onClick={handleClickOpen}>
+              <LabelImportantIcon />
             </IconButton>
+          </Tooltip>
+          {selectedConversation.recipients.length !== 1 && (
+            <Tooltip title="Members" arrow>
+              <IconButton color="inherit" onClick={showMembers}>
+                <PeopleAltIcon />
+              </IconButton>
+            </Tooltip>
           )}
         </Toolbar>
       </AppBar>
