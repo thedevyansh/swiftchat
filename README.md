@@ -64,3 +64,11 @@ Since it becomes tedious to find out the important messages being received from 
 
 
 **NOTE:** This project is still under development for more accuracy and reliability of the models.
+
+# How to run it locally?
+After cloning the repository:
+1. cd into the `server` directory and run `npm install`.
+2. Start the http server (socket.io) by running `npm run dev`. Ensure the server starts running on port 5000.
+3. cd into the `client` directory and run `npm install`.
+4. Start the dev server by running `npm run start`.
+5. Visit `http://localhost:3000`.
