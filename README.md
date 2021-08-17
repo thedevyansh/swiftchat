@@ -53,6 +53,10 @@ Following steps are involved in the application usage:
 - Finally, the label important button shows the messages which have been marked as important by the NLP system.
 
   ![Show important messages](demos/d7.png)
+  
+# Tech Stack
+- Chat application: React.js, Node.js, Socket.io
+- Machine Learning (training, testing and deployment): TensorFlow, TensorFlow.js, Keras, NumPy, pandas
 
 # Problem addressed
 In groups with a lot of messages in real time chat apps like WhatsApp, filtering out messages of relevance becomes a time-consuming task, because of different types of messages; some messages are important notifications while others are grapevine chat (less important or general discussions).<br>
@@ -60,8 +64,3 @@ Since it becomes tedious to find out the important messages being received from 
 
 
 **NOTE:** This project is still under development for more accuracy and reliability of the models.
-
-
-
-
-
