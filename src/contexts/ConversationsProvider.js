@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useCallback } from "react";
-import useLocalStorage from "../hooks/useLocalStorage";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 import { useContacts } from "./ContactsProvider";
 import { useSocket } from "./SocketProvider";
 import * as tf from "@tensorflow/tfjs";
