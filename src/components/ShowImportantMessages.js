@@ -42,20 +42,17 @@ export default function FullScreenDialog({ id, open, handleClose }) {
       >
         <AppBar className={classes.appBar} elevation={0}>
           <Toolbar variant="dense">
+            <Typography variant="h6" className={classes.title}>
+              Important messages
+            </Typography>
             <IconButton
-              edge="start"
+              edge="end"
               color="inherit"
               onClick={handleClose}
               aria-label="close"
             >
               <CloseIcon />
             </IconButton>
-            <Typography variant="h6" className={classes.title}>
-              Important messages
-            </Typography>
-            <Button autoFocus color="inherit" onClick={handleClose}>
-              Okay
-            </Button>
           </Toolbar>
         </AppBar>
         <List>
