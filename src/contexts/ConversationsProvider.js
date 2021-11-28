@@ -53,13 +53,6 @@ export function ConversationsProvider({ id, children }) {
     [setConversations]
   );
 
-  useEffect(() => {
-    if (socket == null) return;
-    socket.on("receive-message", addMessageToConversation);
-
-    return () => socket.off("receive-message");
-  }, [socket, addMessageToConversation]);
-
   function sendMessage(recipients, text) {
     chatResult(text, recipients);
     socket.emit("send-message", {
@@ -67,44 +60,16 @@ export function ConversationsProvider({ id, children }) {
       text,
       isImportant: window.isImportant,
     });
-    //addMessageToConversation({ recipients, text, sender: id });
   }
 
-  const formattedConversations = conversations.map((conversation, index) => {
-    const recipients = conversation.recipients.map((recipient) => {
-      const contact = contacts.find((contact) => {
-        return contact.id === recipient;
-      });
+  useEffect(() => {
+    if (socket == null) return;
+    socket.on("receive-message", addMessageToConversation);
 
-      const name = (contact && contact.name) || recipient;
+    return () => socket.off("receive-message");
+  }, [socket, addMessageToConversation]);
 
-      return { id: recipient, name };
-    });
-
-    const messages = conversation.messages.map((message) => {
-      const contact = contacts.find((contact) => {
-        return contact.id === message.sender;
-      });
-
-      const name = (contact && contact.name) || message.sender;
-      const fromMe = id === message.sender;
-
-      return { ...message, senderName: name, fromMe };
-    });
-
-    const selected = index === selectedConversationIndex;
-    return { ...conversation, messages, recipients, selected };
-  });
-
-  const value = {
-    conversations: formattedConversations,
-    createConversation,
-    selectConversationIndex: setSelectedConversationIndex,
-    selectedConversation: formattedConversations[selectedConversationIndex],
-    sendMessage,
-  };
-
-  const chatResult = (chatString, recipients) => {
+  function chatResult(chatString, recipients) {
     let chatInterFlags = { job: 2, business: 2, tech: 2, medical: 2, work: 2 };
 
     function refineInputMessage(chatString) {
@@ -162,14 +127,14 @@ export function ConversationsProvider({ id, children }) {
       }
     }
 
-    function sendTensorToModel(chatString, featureName, receiver) {
+    function sendTensorToModel(chatString, featureName, recipients) {
       let feature1 = JSON.parse(localStorage.getItem(featureName));
 
       let inputTensor = convertToTensor(
         refineInputMessage(chatString),
         feature1
       );
-      predict(featureName, inputTensor, chatString, receiver);
+      predict(featureName, inputTensor, chatString, recipients);
     }
 
     sendTensorToModel(chatString, "job", recipients);
@@ -177,6 +142,40 @@ export function ConversationsProvider({ id, children }) {
     sendTensorToModel(chatString, "tech", recipients);
     sendTensorToModel(chatString, "medical", recipients);
     sendTensorToModel(chatString, "work", recipients);
+  };
+
+  const formattedConversations = conversations.map((conversation, index) => {
+    const recipients = conversation.recipients.map((recipient) => {
+      const contact = contacts.find((contact) => {
+        return contact.id === recipient;
+      });
+
+      const name = (contact && contact.name) || recipient;
+
+      return { id: recipient, name };
+    });
+
+    const messages = conversation.messages.map((message) => {
+      const contact = contacts.find((contact) => {
+        return contact.id === message.sender;
+      });
+
+      const name = (contact && contact.name) || message.sender;
+      const fromMe = id === message.sender;
+
+      return { ...message, senderName: name, fromMe };
+    });
+
+    const selected = index === selectedConversationIndex;
+    return { ...conversation, messages, recipients, selected };
+  });
+
+  const value = {
+    conversations: formattedConversations,
+    createConversation,
+    selectConversationIndex: setSelectedConversationIndex,
+    selectedConversation: formattedConversations[selectedConversationIndex],
+    sendMessage,
   };
 
   return (
